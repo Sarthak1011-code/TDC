@@ -1,6 +1,6 @@
-import React, { FormEvent, useEffect, useRef, useState, SyntheticEvent, } from 'react';
-import { Code2, Users, Image, ChevronDown, Github, Twitter, Linkedin, Target, Eye, Heart, ChevronUp, Phone, MapPin, Mail, Rocket, Pencil, ArrowRight, ChevronLeft, ChevronRight } from 'lucide-react';
-import { Routes, Route, useNavigate } from 'react-router-dom';
+import { FormEvent, useEffect, useRef, useState } from 'react';
+import { Code2, Users, ChevronDown, Github, Linkedin, Eye, ChevronUp, Phone, MapPin, Mail, Rocket, Pencil } from 'lucide-react';
+import { Routes, Route } from 'react-router-dom';
 import Events from './pages/Events';
 import { NavLink } from './components/NavLink';
 import EventDetails from './pages/EventDetails';
@@ -9,6 +9,21 @@ import { Navbar } from './components/Navbar';
 import emailjs from '@emailjs/browser';
 import toast, { Toaster } from 'react-hot-toast';
 import { Gallery } from './pages/Gallery';
+import { LoadingScreen } from './components/LoadingScreen';
+import { VideoCard } from './components/VideoCard';
+import { ScrollProgress } from './components/ScrollProgress';
+import { BackToTop } from './components/BackToTop';
+import { ThemeToggle } from './components/ThemeToggle';
+import { AnimatedCounter } from './components/AnimatedCounter';
+import { TestimonialCarousel } from './components/TestimonialCarousel';
+import { InteractiveTimeline } from './components/InteractiveTimeline';
+import { GlassCard } from './components/GlassCard';
+import { FloatingActionMenu } from './components/FloatingActionMenu';
+import { AchievementBadges } from './components/AchievementBadges';
+import { InteractiveCursor } from './components/InteractiveCursor';
+import { ParallaxSection } from './components/ParallaxSection';
+import { ThreeScene } from './components/ThreeScene';
+import { StaggerAnimation } from './components/StaggerAnimation';
 
 
 
@@ -100,16 +115,32 @@ const ContactForm = () => {
 };
 
 function App() {
+  const [isLoading, setIsLoading] = useState(true);
 
+  useEffect(() => {
+    // Simulate initial app loading
+    const timer = setTimeout(() => {
+      setIsLoading(false);
+    }, 1500);
+    return () => clearTimeout(timer);
+  }, []);
 
   return (
-    <Routes>
-      <Route path="/" element={<MainApp />} />
-      <Route path="/events" element={<Events />} />
-      <Route path="/events/:eventId" element={<EventDetails />} />
-      <Route path="/hall-of-fame" element={<HallOfFame />} />
-      <Route path="/gallery" element={<Gallery />} />
-    </Routes>
+    <>
+      {isLoading && <LoadingScreen />}
+      <ScrollProgress />
+      <BackToTop />
+      <ThemeToggle />
+      <FloatingActionMenu />
+      <InteractiveCursor />
+      <Routes>
+        <Route path="/" element={<MainApp />} />
+        <Route path="/events" element={<Events />} />
+        <Route path="/events/:eventId" element={<EventDetails />} />
+        <Route path="/hall-of-fame" element={<HallOfFame />} />
+        <Route path="/gallery" element={<Gallery />} />
+      </Routes>
+    </>
   );
 
 }
@@ -134,28 +165,7 @@ function MainApp() {
     return () => window.removeEventListener('resize', checkMobile);
   }, []);
 
-
-  const handleVideoHover = (
-    e: SyntheticEvent<HTMLVideoElement>,
-    action: 'enter' | 'leave'
-  ) => {
-    if (isMobile) return; // Disable hover effects on mobile
-
-    const video = e.currentTarget;
-    if (action === 'enter') {
-      video.play().catch((error: Error) => {
-        console.error('Video play failed:', error);
-      });
-    } else {
-      video.pause();
-      video.currentTime = 0;
-    }
-  };
-
   useEffect(() => {
-
-    const threshold = isMobile ? 0.05 : 0.1;
-    const rootMargin = isMobile ? '0px 0px -50px 0px' : '0px 0px -100px 0px';
 
     const animateOnScroll = (entries: IntersectionObserverEntry[]) => {
       entries.forEach((entry) => {
@@ -263,7 +273,7 @@ function MainApp() {
   }, []);
 
   return (
-    <div className="min-h-screen bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-gray-900 via-gray-800 to-gray-900">
+    <div className="min-h-screen bg-white dark:bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 bg-gradient-to-br from-purple-50 via-white to-pink-50 transition-colors duration-300">
       <link
         rel="stylesheet"
         href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
@@ -387,16 +397,78 @@ function MainApp() {
                 alt="Community meetup"
                 className="rounded-2xl shadow-2xl w-full"
               />
-              <div
-                className="absolute -bottom-8 -right-8 bg-white/10 backdrop-blur-lg p-8 rounded-xl shadow-xl border border-white/20"
-                data-animate
-                data-animation="rotate"
-                data-delay="600"
-              >
+              <div className="absolute -bottom-8 -right-8 bg-white/10 backdrop-blur-lg p-8 rounded-xl shadow-xl border border-white/20">
                 <div className="text-2xl font-bold text-white mb-2">100+</div>
                 <div className="text-gray-300">Active Members</div>
               </div>
             </div>
+          </div>
+          
+          {/* Animated Stats Row */}
+          <div className="mt-24">
+            <StaggerAnimation className="grid grid-cols-2 md:grid-cols-4 gap-6">
+              <GlassCard className="p-6 text-center">
+                <div className="text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-600 mb-2">
+                  <AnimatedCounter end={100} suffix="+" />
+                </div>
+                <p className="text-gray-300">Members</p>
+              </GlassCard>
+              
+              <GlassCard className="p-6 text-center">
+                <div className="text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-cyan-600 mb-2">
+                  <AnimatedCounter end={50} suffix="+" />
+                </div>
+                <p className="text-gray-300">Events</p>
+              </GlassCard>
+              
+              <GlassCard className="p-6 text-center">
+                <div className="text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-green-400 to-emerald-600 mb-2">
+                  <AnimatedCounter end={15} suffix="+" />
+                </div>
+                <p className="text-gray-300">Mentors</p>
+              </GlassCard>
+              
+              <GlassCard className="p-6 text-center">
+                <div className="text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 to-orange-600 mb-2">
+                  <AnimatedCounter end={200} suffix="+" />
+                </div>
+                <p className="text-gray-300">Projects</p>
+              </GlassCard>
+            </StaggerAnimation>
+          </div>
+        </div>
+      </section>
+
+      {/* 3D Interactive Section */}
+      <section className="py-24 bg-gradient-to-b from-gray-900 via-purple-900/20 to-gray-900 relative overflow-hidden">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-8">
+            <h2 className="text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-600 mb-4">
+              Experience Innovation
+            </h2>
+            <p className="text-xl text-gray-300 mb-4">Interact with our 3D visualization</p>
+            <div className="flex flex-wrap justify-center gap-4 text-sm text-gray-400">
+              <span className="flex items-center gap-2">
+                <span className="w-6 h-6 rounded-full bg-purple-500/20 flex items-center justify-center">🖱️</span>
+                Drag to rotate
+              </span>
+              <span className="flex items-center gap-2">
+                <span className="w-6 h-6 rounded-full bg-purple-500/20 flex items-center justify-center">🎯</span>
+                Click objects
+              </span>
+              <span className="flex items-center gap-2">
+                <span className="w-6 h-6 rounded-full bg-purple-500/20 flex items-center justify-center">🔍</span>
+                Scroll to zoom
+              </span>
+              <span className="flex items-center gap-2">
+                <span className="w-6 h-6 rounded-full bg-purple-500/20 flex items-center justify-center">👆</span>
+                Hover for effects
+              </span>
+            </div>
+          </div>
+          
+          <div className="h-[500px] rounded-2xl overflow-hidden bg-gradient-to-br from-purple-900/20 to-pink-900/20 border border-purple-500/20 shadow-2xl shadow-purple-500/10">
+            <ThreeScene className="w-full h-full" />
           </div>
         </div>
       </section>
@@ -612,113 +684,49 @@ function MainApp() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 space-y-6 md:space-y-8">
           {/* First Row - 3 Cards */}
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
-            {[
-              {
-                title: "Web Developers",
-                description: "Guided 15+ Web Developers – Crafting sleek & responsive websites",
-                media: isMobile ? "vid/untitled folder/WhatsApp Image 2025-04-01 at 01.02.00.jpeg" : "vid/one.mp4"
-              },
-              {
-                title: "Future App Developers",
-                description: "Trained 20+ Future App Developers – Shaping the next-gen mobile innovators.",
-                media: isMobile ? "vid/untitled folder/WhatsApp Image 2025-04-01 at 01.06.51.jpeg" : "vid/two.mp4"
-              },
-              {
-                title: "Machine Learning",
-                description: "Empowered 15+ Students in Machine Learning – Building AI-powered solutions.",
-                media: isMobile ? "vid/untitled folder/WhatsApp Image 2025-04-01 at 01.08.31.jpeg" : "vid/three.mp4"
-              }
-            ].map((card, index) => (
-              <div key={index} className="relative group overflow-hidden rounded-xl md:rounded-2xl bg-white/10 backdrop-blur-lg border border-white/20 h-[300px] sm:h-[350px] md:h-[400px]">
-                {isMobile ? (
-                  <img 
-                    src={card.media} 
-                    alt={card.title}
-                    className="absolute inset-0 w-full h-full object-cover opacity-30"
-                    loading="lazy"
-                  />
-                ) : (
-                  <video
-                    className="absolute inset-0 w-full h-full object-cover opacity-0 group-hover:opacity-30 transition-opacity duration-500"
-                    loop
-                    muted
-                    playsInline
-                    preload="none"
-                    onMouseEnter={(e) => handleVideoHover(e, 'enter')}
-                    onMouseLeave={(e) => handleVideoHover(e, 'leave')}
-                  >
-                    <source src={card.media} type="video/mp4" />
-                  </video>
-                )}
-                <div className="relative z-10 p-6 sm:p-8 h-full flex flex-col justify-between">
-                  <h3 className="text-2xl sm:text-3xl font-bold text-white group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-purple-400 group-hover:to-pink-600">
-                    {card.title}
-                  </h3>
-                  <p className="text-base sm:text-lg md:text-xl text-gray-300">{card.description}</p>
-                  <div className="flex justify-end">
-                    <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-gradient-to-r from-purple-500 to-pink-500 flex items-center justify-center transform group-hover:rotate-90 transition-transform duration-500">
-                      <ChevronDown className="w-5 h-5 sm:w-6 sm:h-6 text-white" />
-                    </div>
-                  </div>
-                </div>
-              </div>
-            ))}
+            <VideoCard
+              title="Web Developers"
+              description="Guided 15+ Web Developers – Crafting sleek & responsive websites"
+              videoUrl="vid/one.mp4"
+              isMobile={isMobile}
+              imageUrl="vid/untitled folder/WhatsApp Image 2025-04-01 at 01.02.00.jpeg"
+            />
+            <VideoCard
+              title="Future App Developers"
+              description="Trained 20+ Future App Developers – Shaping the next-gen mobile innovators."
+              videoUrl="vid/two.mp4"
+              isMobile={isMobile}
+              imageUrl="vid/untitled folder/WhatsApp Image 2025-04-01 at 01.06.51.jpeg"
+            />
+            <VideoCard
+              title="Machine Learning"
+              description="Empowered 15+ Students in Machine Learning – Building AI-powered solutions."
+              videoUrl="vid/three.mp4"
+              isMobile={isMobile}
+              imageUrl="vid/untitled folder/WhatsApp Image 2025-04-01 at 01.08.31.jpeg"
+            />
           </div>
 
           {/* Second Row - 3 Cards with Videos */}
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
-            {[
-              {
-                title: "Cybersecurity Enthusiasts",
-                description: "Mentored 30+ Cybersecurity Enthusiasts – Strengthening digital defense skills.",
-                videoUrl: "vid/w-2.webm",
-                fallbackUrl: "vid/w-2.webm"
-              },
-              {
-                title: "Resume",
-                description: "90%+ ATS-Friendly Resumes Crafted – Helping students stand out in job applications.",
-                videoUrl: "vid/w-3.webm",
-                fallbackUrl: "vid/w-3.webm"
-              },
-              {
-                title: "Project",
-                description: "20+ Projects by community.",
-                videoUrl: "vid/w-1.webm",
-                fallbackUrl: "vid/w-1.webm"
-              }
-            ].map((card, index) => (
-              <div
-                key={index}
-                className="relative group overflow-hidden rounded-xl md:rounded-2xl bg-white/10 backdrop-blur-lg border border-white/20 h-[300px] sm:h-[350px] md:h-[400px] transform transition-transform duration-500 hover:scale-[1.02]"
-              >
-                <div className="absolute inset-0 opacity-0 group-hover:opacity-30 transition-opacity duration-500">
-                  <video
-                    className="w-full h-full object-cover"
-                    loop
-                    muted
-                    playsInline
-                    preload="auto"
-                    onMouseEnter={(e) => handleVideoHover(e, 'enter')}
-                    onMouseLeave={(e) => handleVideoHover(e, 'leave')}
-                  >
-                    <source src={card.videoUrl} type="video/webm" />
-                    <source src={card.fallbackUrl} type="video/mp4" />
-                    Your browser does not support the video tag.
-                  </video>
-                </div>
-                <div className="relative z-10 p-6 sm:p-8 h-full flex flex-col justify-between">
-                  <h3 className="text-2xl sm:text-3xl font-bold text-white group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-purple-400 group-hover:to-pink-600">
-                    {card.title}
-                  </h3>
-                  <p className="text-base sm:text-lg md:text-xl text-gray-300">{card.description}</p>
-                  <div className="flex justify-end">
-                    <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-gradient-to-r from-purple-500 to-pink-500 flex items-center justify-center transform group-hover:rotate-90 transition-transform duration-500">
-                      <ChevronDown className="w-5 h-5 sm:w-6 sm:h-6 text-white" />
-                    </div>
-                  </div>
-                </div>
-              </div>
-            ))}
+            <VideoCard
+              title="Cybersecurity Enthusiasts"
+              description="Mentored 30+ Cybersecurity Enthusiasts – Strengthening digital defense skills."
+              videoUrl="vid/w-2.webm"
+              isMobile={isMobile}
+            />
+            <VideoCard
+              title="Resume"
+              description="90%+ ATS-Friendly Resumes Crafted – Helping students stand out in job applications."
+              videoUrl="vid/w-3.webm"
+              isMobile={isMobile}
+            />
+            <VideoCard
+              title="Project"
+              description="20+ Projects by community."
+              videoUrl="vid/w-1.webm"
+              isMobile={isMobile}
+            />
           </div>
 
           {/* Third Row - Stats Cards */}
@@ -753,6 +761,47 @@ function MainApp() {
 
 
 
+
+      {/* Interactive Timeline Section */}
+      <section className="py-16 md:py-24 bg-gradient-to-b from-gray-900 via-gray-800 to-gray-900">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-12">
+            <h2 className="text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-600 mb-4">
+              Our Journey
+            </h2>
+            <p className="text-xl text-gray-300">From inception to innovation - see how we've grown</p>
+          </div>
+          <ParallaxSection speed={0.3}>
+            <InteractiveTimeline />
+          </ParallaxSection>
+        </div>
+      </section>
+
+      {/* Achievement Badges Section */}
+      <section className="py-16 md:py-24 bg-gradient-to-b from-gray-900 via-purple-900/10 to-gray-900">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-12">
+            <h2 className="text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-600 mb-4">
+              Achievement Badges
+            </h2>
+            <p className="text-xl text-gray-300">Unlock badges as you contribute and grow</p>
+          </div>
+          <AchievementBadges />
+        </div>
+      </section>
+
+      {/* Testimonials Section */}
+      <section className="py-16 md:py-24 bg-gradient-to-b from-gray-900 via-gray-800 to-gray-900">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-12">
+            <h2 className="text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-600 mb-4">
+              What Our Members Say
+            </h2>
+            <p className="text-xl text-gray-300">Hear from those who've experienced our community</p>
+          </div>
+          <TestimonialCarousel />
+        </div>
+      </section>
 
       {/* Alumni Section */}
       <section id="alumni" className="py-16 md:py-24 bg-gradient-to-b from-gray-900 via-gray-800 to-gray-900">

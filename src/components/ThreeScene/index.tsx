@@ -1,0 +1,2 @@
+export { ThreeScene } from './ThreeSceneVanilla';
+
