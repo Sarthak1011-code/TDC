@@ -14,6 +14,9 @@ export const ThreeScene: React.FC<ThreeSceneProps> = ({ className = '' }) => {
   useEffect(() => {
     if (!containerRef.current) return;
 
+    // Detect if mobile for performance optimization (MUST be defined before use)
+    const isMobile = window.innerWidth < 768;
+
     // Scene setup
     const scene = new THREE.Scene();
     sceneRef.current = scene;
@@ -59,9 +62,6 @@ export const ThreeScene: React.FC<ThreeSceneProps> = ({ className = '' }) => {
     const directionalLight = new THREE.DirectionalLight(0xffffff, 1);
     directionalLight.position.set(10, 10, 5);
     scene.add(directionalLight);
-
-    // Detect if mobile for performance optimization
-    const isMobile = window.innerWidth < 768;
     
     // Main Sphere with custom shader material for distortion effect
     const sphereGeometry = new THREE.SphereGeometry(2, isMobile ? 32 : 100, isMobile ? 32 : 100);

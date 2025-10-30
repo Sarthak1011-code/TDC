@@ -132,8 +132,7 @@ function App() {
       <BackToTop />
       <ThemeToggle />
       <FloatingActionMenu />
-      {/* Temporarily disabled InteractiveCursor to fix initialization error */}
-      {/* <InteractiveCursor /> */}
+      <InteractiveCursor />
       <Routes>
         <Route path="/" element={<MainApp />} />
         <Route path="/events" element={<Events />} />
