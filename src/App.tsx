@@ -132,7 +132,8 @@ function App() {
       <BackToTop />
       <ThemeToggle />
       <FloatingActionMenu />
-      <InteractiveCursor />
+      {/* Temporarily disabled InteractiveCursor to fix initialization error */}
+      {/* <InteractiveCursor /> */}
       <Routes>
         <Route path="/" element={<MainApp />} />
         <Route path="/events" element={<Events />} />
@@ -691,23 +692,23 @@ function MainApp() {
             <VideoCard
               title="Web Developers"
               description="Guided 15+ Web Developers – Crafting sleek & responsive websites"
-              videoUrl="vid/one.mp4"
+              videoUrl="/vid/7989454-hd_1920_1080_25fps.mp4"
               isMobile={isMobile}
-              imageUrl="vid/untitled folder/WhatsApp Image 2025-04-01 at 01.02.00.jpeg"
+              imageUrl="/vid/untitled folder/WhatsApp Image 2025-04-01 at 01.02.00.jpeg"
             />
             <VideoCard
               title="Future App Developers"
               description="Trained 20+ Future App Developers – Shaping the next-gen mobile innovators."
-              videoUrl="vid/two.mp4"
+              videoUrl="/vid/7989454-hd_1920_1080_25fps.mp4"
               isMobile={isMobile}
-              imageUrl="vid/untitled folder/WhatsApp Image 2025-04-01 at 01.06.51.jpeg"
+              imageUrl="/vid/untitled folder/WhatsApp Image 2025-04-01 at 01.06.51.jpeg"
             />
             <VideoCard
               title="Machine Learning"
               description="Empowered 15+ Students in Machine Learning – Building AI-powered solutions."
-              videoUrl="vid/three.mp4"
+              videoUrl="/vid/7989454-hd_1920_1080_25fps.mp4"
               isMobile={isMobile}
-              imageUrl="vid/untitled folder/WhatsApp Image 2025-04-01 at 01.08.31.jpeg"
+              imageUrl="/vid/untitled folder/WhatsApp Image 2025-04-01 at 01.08.31.jpeg"
             />
           </div>
 
@@ -716,19 +717,19 @@ function MainApp() {
             <VideoCard
               title="Cybersecurity Enthusiasts"
               description="Mentored 30+ Cybersecurity Enthusiasts – Strengthening digital defense skills."
-              videoUrl="vid/w-2.webm"
+              videoUrl="/vid/7989454-hd_1920_1080_25fps.mp4"
               isMobile={isMobile}
             />
             <VideoCard
               title="Resume"
               description="90%+ ATS-Friendly Resumes Crafted – Helping students stand out in job applications."
-              videoUrl="vid/w-3.webm"
+              videoUrl="/vid/7989454-hd_1920_1080_25fps.mp4"
               isMobile={isMobile}
             />
             <VideoCard
               title="Project"
               description="20+ Projects by community."
-              videoUrl="vid/w-1.webm"
+              videoUrl="/vid/7989454-hd_1920_1080_25fps.mp4"
               isMobile={isMobile}
             />
           </div>
