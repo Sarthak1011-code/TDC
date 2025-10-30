@@ -24,7 +24,7 @@ export const BackToTop = () => {
   return (
     <button
       onClick={scrollToTop}
-      className={`fixed bottom-8 right-4 md:bottom-12 md:right-8 z-50 p-3 md:p-4 rounded-full bg-gradient-to-r from-purple-500 to-pink-500 text-white shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-110 ${
+      className={`fixed bottom-8 right-4 md:bottom-12 md:right-8 z-50 p-3 md:p-4 min-w-[48px] min-h-[48px] rounded-full bg-gradient-to-r from-purple-500 to-pink-500 text-white shadow-lg hover:shadow-xl active:scale-95 transition-all duration-300 transform hover:scale-110 touch-manipulation ${
         isVisible ? 'translate-y-0 opacity-100' : 'translate-y-16 opacity-0 pointer-events-none'
       }`}
       aria-label="Back to top"

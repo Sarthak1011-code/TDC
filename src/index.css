@@ -4,6 +4,20 @@
 
 html {
   scroll-behavior: smooth;
+  overflow-x: hidden;
+}
+
+body {
+  overflow-x: hidden;
+  position: relative;
+  width: 100%;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Prevent horizontal scroll on all containers */
+* {
+  max-width: 100%;
 }
 
 /* Smooth transitions for dark mode */
@@ -47,5 +61,50 @@ html {
 
 .animate-scan {
   animation: scan 8s linear infinite;
+}
+
+/* Mobile optimizations */
+@media (max-width: 768px) {
+  /* Improve touch targets */
+  button, a, input, textarea {
+    min-height: 44px;
+    min-width: 44px;
+  }
+  
+  /* Prevent text overflow */
+  h1, h2, h3, h4, h5, h6, p {
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+  }
+  
+  /* Optimize images for mobile */
+  img, video {
+    max-width: 100%;
+    height: auto;
+  }
+  
+  /* Better spacing on mobile */
+  .container {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+  
+  /* Disable custom cursor on mobile */
+  .custom-cursor,
+  .custom-cursor-trail {
+    display: none !important;
+  }
+  
+  /* Reduce animations on mobile for performance */
+  * {
+    animation-duration: 0.5s !important;
+  }
+  
+  /* Fix Three.js canvas overflow */
+  canvas {
+    max-width: 100% !important;
+    height: auto !important;
+    touch-action: pan-y pinch-zoom;
+  }
 }
 

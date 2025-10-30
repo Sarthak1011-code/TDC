@@ -37,10 +37,10 @@ export const ThreeScene: React.FC<ThreeSceneProps> = ({ className = '' }) => {
     // Renderer setup
     const renderer = new THREE.WebGLRenderer({ 
       alpha: true, 
-      antialias: true 
+      antialias: !isMobile 
     });
     renderer.setSize(containerRef.current.clientWidth, containerRef.current.clientHeight);
-    renderer.setPixelRatio(window.devicePixelRatio);
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, isMobile ? 1.5 : 2));
     containerRef.current.appendChild(renderer.domElement);
     rendererRef.current = renderer;
 
@@ -60,8 +60,11 @@ export const ThreeScene: React.FC<ThreeSceneProps> = ({ className = '' }) => {
     directionalLight.position.set(10, 10, 5);
     scene.add(directionalLight);
 
+    // Detect if mobile for performance optimization
+    const isMobile = window.innerWidth < 768;
+    
     // Main Sphere with custom shader material for distortion effect
-    const sphereGeometry = new THREE.SphereGeometry(2, 100, 100);
+    const sphereGeometry = new THREE.SphereGeometry(2, isMobile ? 32 : 100, isMobile ? 32 : 100);
     const sphereMaterial = new THREE.MeshStandardMaterial({
       color: 0x8b5cf6,
       roughness: 0.2,
@@ -105,7 +108,7 @@ export const ThreeScene: React.FC<ThreeSceneProps> = ({ className = '' }) => {
 
     // Particle System
     const particlesGeometry = new THREE.BufferGeometry();
-    const particlesCount = 1000;
+    const particlesCount = isMobile ? 300 : 1000;
     const positions = new Float32Array(particlesCount * 3);
 
     for (let i = 0; i < particlesCount; i++) {

@@ -71,7 +71,7 @@ export const FloatingActionMenu = () => {
               {/* Button */}
               <button
                 onClick={action.action}
-                className={`p-4 rounded-full bg-gradient-to-r ${action.color} text-white shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-110`}
+                className={`p-4 min-w-[48px] min-h-[48px] rounded-full bg-gradient-to-r ${action.color} text-white shadow-lg hover:shadow-xl active:scale-95 transition-all duration-300 transform hover:scale-110 touch-manipulation`}
                 aria-label={action.label}
               >
                 <Icon className="w-5 h-5" />
@@ -84,7 +84,7 @@ export const FloatingActionMenu = () => {
       {/* Toggle Button */}
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className={`p-4 md:p-5 rounded-full bg-gradient-to-r from-purple-500 to-pink-500 text-white shadow-2xl hover:shadow-purple-500/50 transition-all duration-300 transform hover:scale-110 ${
+        className={`p-4 md:p-5 min-w-[56px] min-h-[56px] rounded-full bg-gradient-to-r from-purple-500 to-pink-500 text-white shadow-2xl hover:shadow-purple-500/50 active:scale-95 transition-all duration-300 transform hover:scale-110 touch-manipulation ${
           isOpen ? 'rotate-45' : 'rotate-0'
         }`}
         aria-label="Toggle action menu"

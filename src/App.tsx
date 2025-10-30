@@ -440,34 +440,38 @@ function MainApp() {
       </section>
 
       {/* 3D Interactive Section */}
-      <section className="py-24 bg-gradient-to-b from-gray-900 via-purple-900/20 to-gray-900 relative overflow-hidden">
+      <section className="py-12 sm:py-16 md:py-24 bg-gradient-to-b from-gray-900 via-purple-900/20 to-gray-900 relative overflow-hidden">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-8">
-            <h2 className="text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-600 mb-4">
+          <div className="text-center mb-6 sm:mb-8">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-600 mb-3 sm:mb-4">
               Experience Innovation
             </h2>
-            <p className="text-xl text-gray-300 mb-4">Interact with our 3D visualization</p>
-            <div className="flex flex-wrap justify-center gap-4 text-sm text-gray-400">
-              <span className="flex items-center gap-2">
-                <span className="w-6 h-6 rounded-full bg-purple-500/20 flex items-center justify-center">🖱️</span>
-                Drag to rotate
+            <p className="text-base sm:text-lg md:text-xl text-gray-300 mb-3 sm:mb-4">Interact with our 3D visualization</p>
+            <div className="flex flex-wrap justify-center gap-2 sm:gap-3 md:gap-4 text-xs sm:text-sm text-gray-400 px-4">
+              <span className="flex items-center gap-1 sm:gap-2">
+                <span className="w-5 h-5 sm:w-6 sm:h-6 rounded-full bg-purple-500/20 flex items-center justify-center text-xs sm:text-base">🖱️</span>
+                <span className="hidden sm:inline">Drag to rotate</span>
+                <span className="sm:hidden">Drag</span>
               </span>
-              <span className="flex items-center gap-2">
-                <span className="w-6 h-6 rounded-full bg-purple-500/20 flex items-center justify-center">🎯</span>
-                Click objects
+              <span className="flex items-center gap-1 sm:gap-2">
+                <span className="w-5 h-5 sm:w-6 sm:h-6 rounded-full bg-purple-500/20 flex items-center justify-center text-xs sm:text-base">🎯</span>
+                <span className="hidden sm:inline">Click objects</span>
+                <span className="sm:hidden">Click</span>
               </span>
-              <span className="flex items-center gap-2">
-                <span className="w-6 h-6 rounded-full bg-purple-500/20 flex items-center justify-center">🔍</span>
-                Scroll to zoom
+              <span className="flex items-center gap-1 sm:gap-2">
+                <span className="w-5 h-5 sm:w-6 sm:h-6 rounded-full bg-purple-500/20 flex items-center justify-center text-xs sm:text-base">🔍</span>
+                <span className="hidden sm:inline">Scroll to zoom</span>
+                <span className="sm:hidden">Zoom</span>
               </span>
-              <span className="flex items-center gap-2">
-                <span className="w-6 h-6 rounded-full bg-purple-500/20 flex items-center justify-center">👆</span>
-                Hover for effects
+              <span className="flex items-center gap-1 sm:gap-2">
+                <span className="w-5 h-5 sm:w-6 sm:h-6 rounded-full bg-purple-500/20 flex items-center justify-center text-xs sm:text-base">👆</span>
+                <span className="hidden sm:inline">Hover for effects</span>
+                <span className="sm:hidden">Tap</span>
               </span>
             </div>
           </div>
           
-          <div className="h-[500px] rounded-2xl overflow-hidden bg-gradient-to-br from-purple-900/20 to-pink-900/20 border border-purple-500/20 shadow-2xl shadow-purple-500/10">
+          <div className="h-[300px] sm:h-[400px] md:h-[500px] rounded-xl md:rounded-2xl overflow-hidden bg-gradient-to-br from-purple-900/20 to-pink-900/20 border border-purple-500/20 shadow-2xl shadow-purple-500/10 touch-none">
             <ThreeScene className="w-full h-full" />
           </div>
         </div>

@@ -44,9 +44,10 @@ export const VideoCard: React.FC<VideoCardProps> = ({
 
   return (
     <div 
-      className="relative group overflow-hidden rounded-xl md:rounded-2xl bg-white/10 backdrop-blur-lg border border-white/20 h-[300px] sm:h-[350px] md:h-[400px] cursor-pointer"
+      className="relative group overflow-hidden rounded-xl md:rounded-2xl bg-white/10 backdrop-blur-lg border border-white/20 h-[300px] sm:h-[350px] md:h-[400px] cursor-pointer touch-manipulation"
       onMouseEnter={() => setShowControls(true)}
       onMouseLeave={() => setShowControls(false)}
+      onTouchStart={() => setShowControls(true)}
     >
       {isMobile && imageUrl ? (
         <img 
